@@ -6,7 +6,7 @@ var logger = require("morgan");
 const dotenv = require("dotenv");
 
 dotenv.config();
-
+const auth = require("./routes/auth");
 const games = require("./routes/games");
 
 var app = express();
@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/auth", auth);
 app.use("/games", games);
 
 // catch 404 and forward to error handler
@@ -32,7 +33,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  console.error(err);
 });
 
 module.exports = app;

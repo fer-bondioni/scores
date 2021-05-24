@@ -1,8 +1,14 @@
 const { pool } = require("../utils/bd");
 
 //datos de entrada -> validar
-const create = async (obj) => {
-  (await pool()).collection("equipos").insertOne(obj);
+const create = async ({ golesAFavor, golesEnContra, fecha, puntos, rival }) => {
+  (await pool()).collection("equipos").insertOne({
+    golesAFavor,
+    golesEnContra,
+    fecha: new Date(fecha),
+    puntos,
+    rival,
+  });
 };
 
 //find({conditions}, {projections}), sort, limit

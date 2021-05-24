@@ -26,5 +26,11 @@ const filter = async (req, res) => {
     res.status(500).json({ message: "Ocurrió un error", e });
   }
 };
+const create = (req, res) => {
+  model
+    .create(req.body)
+    .then((response) => res.json(response))
+    .catch((e) => res.status(500).json(e));
+};
 
-module.exports = { all, last, filter };
+module.exports = { all, last, filter, create };
